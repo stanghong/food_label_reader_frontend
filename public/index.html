@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Label Reader</title>
+</head>
+<body>
+    <h1>Food Label Reader</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="image" name="image" accept="image/*">
+        <button type="submit">Analyze Image</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileInput = document.getElementById('image');
+            formData.append('image', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.error) {
+                    document.getElementById('results').textContent = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('results').innerHTML = `
+                        <p>Processed Image URL: <a href="${data.processed_image_url}" target="_blank">View Image</a></p>
+                        <p>Extracted Labels: ${data.extracted_labels}</p>
+                        <p>Health Recommendations: ${data.health_recommendations}</p>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('results').textContent = 'Failed to process image.';
+            }
+        });
+    </script>
+</body>
+</html>
