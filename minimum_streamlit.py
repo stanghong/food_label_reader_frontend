@@ -55,7 +55,7 @@ if uploaded_image:
                 data = response.json()
                 st.session_state['processed_image_url'] = data.get('processed_image_url', 'No URL available')
                 st.session_state['extracted_labels'] = data.get('extracted_labels', 'No labels extracted')
-                st.session_state['extracted_labels_chinese'] = data.get('chinese_labels', 'No labels extracted')
+                st.session_state['extracted_labels_chinese'] = data.get('extracted_labels_chinese', 'No labels extracted')
                 st.session_state['health_recommendations'] = data.get('health_recommendations', 'No recommendations available')
             else:
                 st.error(f"Server returned an error: {response.status_code} - {response.text}")
@@ -68,6 +68,6 @@ if st.session_state['processed_image_url']:
 if st.session_state['extracted_labels']:
     st.markdown(f"**Extracted Labels:** {st.session_state['extracted_labels']}")
 if st.session_state['extracted_labels_chinese']:
-    st.markdown(f"**Extracted Labels Chinese:** {st.session_state['chinese_labels']}")
+    st.markdown(f"**Extracted Labels Chinese:** {st.session_state['extracted_labels_chinese']}")
 if st.session_state['health_recommendations']:
     st.markdown(f"**Health Recommendations:** {st.session_state['health_recommendations']}")
