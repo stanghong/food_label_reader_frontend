@@ -68,6 +68,6 @@ if st.session_state['processed_image_url']:
 if st.session_state['extracted_labels']:
     st.markdown(f"**Extracted Labels:** {st.session_state['extracted_labels']}")
 if st.session_state['extracted_labels_chinese']:
-    st.markdown(f"**Extracted Labels Chinese:** {st.session_state['extracted_labels_chinese']}")
+    st.markdown(f"**Extracted Labels Chinese:** {st.session_state['chinese_labels']}")
 if st.session_state['health_recommendations']:
     st.markdown(f"**Health Recommendations:** {st.session_state['health_recommendations']}")
