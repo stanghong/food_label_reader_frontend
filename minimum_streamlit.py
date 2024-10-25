@@ -13,10 +13,11 @@ from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
 
 # Ensure the API URL is properly formatted
-API_URL = os.getenv('API_URL', 'https://foodlabelreaderapi-production.up.railway.app/api/food-label-reader/')
-if not API_URL.startswith(('http://', 'https://')):
-    st.error("Invalid API URL. Please make sure it starts with 'http://' or 'https://'.")
-    st.stop()
+# API_URL = os.getenv('API_URL', 'https://foodlabelreaderapi-production.up.railway.app/api/food-label-reader/')
+# if not API_URL.startswith(('http://', 'https://')):
+#     st.error("Invalid API URL. Please make sure it starts with 'http://' or 'https://'.")
+#     st.stop()
+API_URL = os.getenv('API_URL', 'http://127.0.0.1:8000/api/food-label-reader/')
 
 # Streamlit UI components
 st.title("NutriSnap: Eat Smart, Live Better")
