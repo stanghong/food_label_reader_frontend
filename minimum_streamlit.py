@@ -11,7 +11,11 @@ from dotenv import load_dotenv, find_dotenv
 # Load environment variables
 _ = load_dotenv(find_dotenv())
 
-API_URL = os.getenv('API_URL', 'http:/foodlabelreaderapi-production.up.railway.app/api/food-label-reader/')  # Replace with your actual API endpoint
+# Ensure the API URL is properly formatted
+API_URL = os.getenv('API_URL', 'https://foodlabelreaderapi-production.up.railway.app/api/food-label-reader/')
+if not API_URL.startswith(('http://', 'https://')):
+    st.error("Invalid API URL. Please make sure it starts with 'http://' or 'https://'.")
+    st.stop()
 
 # Streamlit UI components
 st.title("Food Label Reader")
@@ -64,8 +68,10 @@ if uploaded_image:
                 st.success("Image processed successfully!")
             else:
                 st.error(f"Server returned an error: {response.status_code} - {response.text}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"Failed to send image to the server: {e}")
         except Exception as e:
-            st.error(f"Failed to send image to the server: {str(e)}")
+            st.error(f"An unexpected error occurred: {str(e)}")
 
 # Display the results if available
 if st.session_state['processed_image_url']:
@@ -74,5 +80,4 @@ if st.session_state['extracted_labels']:
     st.markdown(f"**Extracted Labels:** {st.session_state['extracted_labels']}")
 if st.session_state['health_recommendations']:
     st.markdown(f"**Health Recommendations:** {st.session_state['health_recommendations']}")
-
 # %%
