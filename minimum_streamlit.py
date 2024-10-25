@@ -19,7 +19,7 @@ if not API_URL.startswith(('http://', 'https://')):
     st.stop()
 
 # Streamlit UI components
-st.title("Food Label Reader")
+st.title("NutriSnap: Eat Smart, Live Better")
 
 # Initialize session state for the API response data
 if 'processed_image_url' not in st.session_state:
