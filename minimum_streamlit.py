@@ -10,7 +10,8 @@ from dotenv import load_dotenv, find_dotenv
 
 # Load environment variables
 _ = load_dotenv(find_dotenv())
-API_URL = os.getenv('API_URL', 'http://127.0.0.1:8000/api/food-label-reader/')  # Replace with your actual API endpoint
+
+API_URL = os.getenv('API_URL', 'http:/foodlabelreaderapi-production.up.railway.app/api/food-label-reader/')  # Replace with your actual API endpoint
 
 # Streamlit UI components
 st.title("Food Label Reader")
