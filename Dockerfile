@@ -1,20 +1,21 @@
 # Use the official Python image as a base
 FROM python:3.9.6
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file to the container
+# Copy requirements.txt first, to leverage Docker cache
 COPY requirements.txt .
 
-# Install the required Python packages
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN pip install -r requirements.txt
 
-# Copy the entire application into the container
+# Copy the rest of your app's code
 COPY . .
 
-# Expose port 8501 (Streamlit's default port)
+# Expose port 8501
 EXPOSE 8501
 
-# Command to run the Streamlit app
+# Run the Streamlit app
 CMD ["streamlit", "run", "minimum_streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
